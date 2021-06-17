@@ -3,7 +3,7 @@ FROM python:3.6
 WORKDIR /user/source/app
 
 COPY setup.py ./
-COPY API/API.py ./API/API.py
+COPY API.py ./API.py
 
 RUN pip install -e .
 
