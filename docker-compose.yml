@@ -1,0 +1,14 @@
+version: "3"
+services:
+  captcha_ml:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - /tmp/captcha_ml:/user/source/app/reports
+    networks:
+      - development-network
+
+networks:
+  development-network:
+    driver: bridge
