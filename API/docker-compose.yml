@@ -1,11 +1,12 @@
 version: "3"
 services:
-  captcha_ml:
+  captcha:
     build: .
+    container_name: "captcha_ml"
     ports:
       - "5000:5000"
     volumes:
-      - /tmp/captcha_ml:/user/source/app/reports
+      - /tmp/captcha:/user/source/app/reports
     networks:
       - development-network
 

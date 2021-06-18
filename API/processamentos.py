@@ -3,7 +3,6 @@ import numpy as np
 import imutils
 import cv2
 from PIL import Image
-import scipy.misc
 
 #Tirar comentario do imrad e trocar parametro path no grayscaling para rodar localmente
 def process_1(path):
