@@ -1,14 +1,6 @@
 import cv2
 import pytesseract
 from pytesseract import Output
-import os
-import os.path
-import cv2
-import glob
-import argparse
-from imutils import paths
-import numpy as np
-from PIL import Image, ImageEnhance, ImageFilter
 import string as s
 
 import processing_lab

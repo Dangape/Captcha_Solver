@@ -13,8 +13,6 @@ import scipy.misc
 def process_1(path):
     # Load image
     img = cv2.imread(path)
-    cv2.imshow("Output", img)
-    cv2.waitKey(10)
     # Grayscaling
     img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     _,thresh = cv2.threshold(img,240,255, cv2.THRESH_BINARY_INV + cv2.THRESH_TRUNC)
@@ -84,12 +82,17 @@ def process_3(path):
 
 #Tirar comentario do imgread se quiser rodar localmente
 def get_letters(captcha):
+    """
+       A function to create contours of captcha's letters
+       :param captcha: treated captcha image
+       :return: array with letter images
+       """
     counts = {}
-    img = cv2.imread(captcha)
-    resized = cv2.resize(img, (140,60), interpolation=cv2.INTER_AREA)
+    # img = cv2.imread(captcha)
+    resized = cv2.resize(captcha, (140,60), interpolation=cv2.INTER_AREA)
     # cinza
-    img_gray = cv2.cvtColor(resized, cv2.COLOR_RGB2GRAY)
-    img_gray = cv2.copyMakeBorder(img_gray, 10,10,10,10,cv2.BORDER_CONSTANT,value=[255,255,255])
+    # img_gray = cv2.cvtColor(resized, cv2.COLOR_RGB2GRAY)
+    img_gray = cv2.copyMakeBorder(resized, 10,10,10,10,cv2.BORDER_CONSTANT,value=[255,255,255])
     blur = cv2.GaussianBlur(img_gray, (3, 3), 0)
 
     # preto e branco
@@ -128,8 +131,6 @@ def get_letters(captcha):
 
         cv2.rectangle(img_final, (x - 2, y - 2), (x + l + 2, y + a + 2), (0, 255, 0), 1)
         lista_letras.append(img_letra)
-        cv2.imshow("Output", img_letra)
-        cv2.waitKey()
 
     return lista_letras
 

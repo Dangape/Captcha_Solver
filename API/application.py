@@ -30,7 +30,6 @@ def home():
 
 @app.route('/ocr', methods=['POST'])
 def predict_text():
-
     name1 = request.files['file']
     filename = name1.filename
     encoded_string = base64.b64encode(name1.read())

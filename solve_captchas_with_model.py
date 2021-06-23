@@ -84,11 +84,9 @@ def solve_captcha(image_file):
         letter = lb.inverse_transform(prediction)[0]
         predictions.append(letter)
 
-    # Print the captcha's text
+    # Get captcha's text
     captcha_text = "".join(predictions)
-    # print("CAPTCHA text is: {}".format(captcha_text))
-    # print("Real text is: {}".format(image_file[-8:])))
-
+  
     #Find real captcha name
     string = image_file
     start = string.rfind('\\') #last occurence of '\'
@@ -96,7 +94,7 @@ def solve_captcha(image_file):
 
     return captcha_text,image_file[start+1:end]
 
-image_file = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\tratados\1\16FXY.png"
 solution = solve_captcha(captcha_image_files[0])
 print('Predicted text is: {}'.format(solution[0]))
+
 print('Real text is: {}'.format(solution[1]))
