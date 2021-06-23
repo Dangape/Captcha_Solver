@@ -2,7 +2,7 @@ version: "3"
 services:
   captcha:
     build: .
-    container_name: "captcha_ml"
+    container_name: "captcha_keras"
     ports:
       - "5000:5000"
     volumes:

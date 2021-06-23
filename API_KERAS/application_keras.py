@@ -1,27 +1,31 @@
 from flask import Flask, request
-
 import processing_lab
-import cv2
-import pytesseract
-from pytesseract import Output
 import base64
-import string as s
 from imageio import imread
 import io
 import numpy as np
 from tensorflow.keras.models import load_model
 import pickle
 
+
 app = Flask(__name__)
 
 app.config['DEBUG'] = True
+UPLOAD_FOLDER = r'E:\Users\Daniel\OneDrive\CaptchaML\templates'
 ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif']
 app.secret_key = "secret key"
+
 
 MODEL_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\API_KERAS\result_model_letter.h5"
 MODEL_LABELS_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\API_KERAS\model_labels.dat"
 
-app = Flask(__name__)
+# Load up the model labels (so we can translate model predictions to actual letters)
+with open(MODEL_LABELS_FILENAME, "rb") as f:
+    lb = pickle.load(f)
+
+# Load the trained neural network
+model = load_model(MODEL_FILENAME)
+
 @app.route('/')
 def home():
     text = 'Hello World'
@@ -29,13 +33,6 @@ def home():
 
 @app.route('/ocr', methods=['POST'])
 def predict_text():
-    # Load up the model labels (so we can translate model predictions to actual letters)
-    with open(MODEL_LABELS_FILENAME, "rb") as f:
-        lb = pickle.load(f)
-
-    # Load the trained neural network
-    model = load_model(MODEL_FILENAME)
-
     name1 = request.files['file']
     filename = name1.filename
     encoded_string = base64.b64encode(name1.read())
@@ -68,6 +65,5 @@ def predict_text():
         real = filename[:end]
     return {'Predicted':captcha_text,"Real":real}
 
-
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, use_debugger=False, use_reloader=False)

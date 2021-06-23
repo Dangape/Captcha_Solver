@@ -11,18 +11,14 @@ import io
 
 
 
-# pytesseract.pytesseract.tesseract_cmd = r"C:\Program FIles\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program FIles\Tesseract-OCR\tesseract.exe"
 app = Flask(__name__)
 
 app.config['DEBUG'] = True
 UPLOAD_FOLDER = r'E:\Users\Daniel\OneDrive\CaptchaML\templates'
 ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif']
-app.secret_key = "secret key"
+# app.secret_key = "secret key"
 
-
-
-
-app = Flask(__name__)
 @app.route('/')
 def home():
     text = 'Hello World'

@@ -5,12 +5,12 @@ import pickle
 from tensorflow.keras.models import load_model
 
 
-MODEL_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\API_KERAS\result_model_letter.h5"
-MODEL_LABELS_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\API_KERAS\model_labels.dat"
-CAPTCHA_IMAGE_FOLDER = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\captcha_groups\1"
-
-captcha_image_files = list(paths.list_images(CAPTCHA_IMAGE_FOLDER))
-captcha_image_files = np.random.choice(captcha_image_files, size=(1,), replace=False)
+# MODEL_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\API_KERAS\result_model_letter.h5"
+# MODEL_LABELS_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\API_KERAS\model_labels.dat"
+# CAPTCHA_IMAGE_FOLDER = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\captcha_groups\1"
+#
+# captcha_image_files = list(paths.list_images(CAPTCHA_IMAGE_FOLDER))
+# captcha_image_files = np.random.choice(captcha_image_files, size=(1,), replace=False)
 
 # Load up the model labels (so we can translate model predictions to actual letters)
 with open(MODEL_LABELS_FILENAME, "rb") as f:
@@ -50,5 +50,5 @@ def predict_text(path):
     return captcha_text,path[start+1:end]
 
 teste = predict_text(captcha_image_files[0])
-# print("Real text is:",teste[0])
-# print("Predicted text is:",teste[1])
+print("Real text is:",teste[0])
+print("Predicted text is:",teste[1])

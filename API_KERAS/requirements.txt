@@ -1,8 +1,9 @@
 numpy
 Flask
-pytesseract
 opencv-python
 imageio
 Pillow
 imutils
 uwsgi
+tensorflow
+keras

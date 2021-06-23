@@ -1,9 +1,7 @@
-from imutils import paths
 import numpy as np
 import imutils
 import cv2
 from PIL import Image
-import scipy.misc
 
 # 1 = caxias
 # 2 = barueri
@@ -12,9 +10,9 @@ import scipy.misc
 #Tirar comentario do imread e trocar parametro path no grayscaling para rodar localmente
 def process_1(path):
     # Load image
-    img = cv2.imread(path)
+    # img = cv2.imread(path)
     # Grayscaling
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    img = cv2.cvtColor(path, cv2.COLOR_RGB2GRAY)
     _,thresh = cv2.threshold(img,240,255, cv2.THRESH_BINARY_INV + cv2.THRESH_TRUNC)
     thresh = cv2.bitwise_not(thresh)
     rgb = Image.fromarray(thresh)
@@ -53,11 +51,11 @@ def process_2(path):
 
 def process_3(path):
     # Load image
-    img = cv2.imread(path)
+    # img = cv2.imread(path)
     # Grayscaling
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    # img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
-    _,thresh = cv2.threshold(img,127,255, cv2.THRESH_BINARY + cv2.THRESH_TRUNC)
+    _,thresh = cv2.threshold(path,127,255, cv2.THRESH_BINARY + cv2.THRESH_TRUNC)
 
     close = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, np.ones((2, 1), np.uint8))
     dilate = cv2.dilate(close, np.ones((4, 1), np.uint8), iterations=1)
