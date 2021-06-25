@@ -55,7 +55,7 @@ data = np.array(data, dtype="float") / 255.0
 labels = np.array(labels)
 
 # Split the training data into separate train and test sets
-(X_train, X_test, Y_train, Y_test) = train_test_split(data, labels, test_size=0.05, random_state=0)
+(X_train, X_test, Y_train, Y_test) = train_test_split(data, labels, test_size=0.20, random_state=0)
 
 # Convert the labels (letters) into one-hot encodings that Keras can work with
 lb = LabelBinarizer().fit(Y_train)
@@ -131,7 +131,7 @@ yres = np.argmax(Y_test,axis= 1)
 with open(MODEL_LABELS_FILENAME, "rb") as f:
     lb = pickle.load(f)
 
-target_name = ["1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","W","Y","Z"]
+target_name = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","W","Y","Z"]
 
 print('Accuracy : ' + str(accuracy_score(yres, pred)))
 print(classification_report(yres, pred,target_names=target_name))
