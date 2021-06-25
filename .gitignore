@@ -1,6 +1,7 @@
 Data/bdcaptcha-20210611T034958Z-001.zip
 testes/archive.zip
-*.png
+Data/*
+solving_captchas_code_examples/*
 *.zip
 *.jpg
 Workenv/*
