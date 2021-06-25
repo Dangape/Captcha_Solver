@@ -13,6 +13,10 @@ from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import time
+from tensorflow.keras.models import load_model
+from sklearn.metrics import accuracy_score, classification_report
+import pandas as pd
+
 
 start_time = time.time()
 
@@ -57,6 +61,8 @@ labels = np.array(labels)
 lb = LabelBinarizer().fit(Y_train)
 Y_train = lb.transform(Y_train)
 Y_test = lb.transform(Y_test)
+info = {lb[i] : Y_train[i] for i in range(len(Y_train))}
+print(info)
 
 # Save the mapping from labels to one-hot encodings.
 # We'll need this later when we use the model to decode what it's predictions mean
@@ -113,6 +119,22 @@ plt.ylabel('Accuracy')
 plt.legend(['train acc' , 'val acc'])
 plt.title('Model accuracy x Epoch')
 plt.savefig(r"E:\Users\Daniel\OneDrive\CaptchaML\Plots\model_training.png")
+
+model = load_model("result_model_letter.h5")
+pred = model.predict(X_test)
+
+
+pred = np.argmax(pred, axis = 1)
+yres = np.argmax(Y_test,axis= 1)
+
+# Load up the model labels (so we can translate model predictions to actual letters)
+with open(MODEL_LABELS_FILENAME, "rb") as f:
+    lb = pickle.load(f)
+
+target_name = ["1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","W","Y","Z"]
+
+print('Accuracy : ' + str(accuracy_score(yres, pred)))
+print(classification_report(yres, pred,target_names=target_name))
 
 
 print("%s minutes" %((time.time() - start_time)/60))
