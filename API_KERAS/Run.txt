@@ -1,1 +1,1 @@
-docker-compose build && docker-compose up && docker push dangape/api_keras
+docker-compose build && docker-compose up && docker image tag api_keras_captcha dangape/api_keras && docker push dangape/api_keras

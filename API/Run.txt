@@ -1,1 +1,0 @@
-docker-compose build && docker-compose up && docker push dangape/api_captcha

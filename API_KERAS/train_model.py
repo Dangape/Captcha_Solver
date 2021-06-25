@@ -18,7 +18,7 @@ start_time = time.time()
 
 LETTER_IMAGES_FOLDER = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\extracted_letter_images"
 MODEL_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\captcha_model.hdf5"
-MODEL_LABELS_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\model_labels.dat"
+MODEL_LABELS_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\API_KERAS\model_labels.dat"
 
 
 # initialize the data and labels

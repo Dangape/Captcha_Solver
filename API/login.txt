@@ -1,4 +1,0 @@
-{
-'username':'dangape'
-'secret':'Papadame@2&4'
-}
