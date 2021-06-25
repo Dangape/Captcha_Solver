@@ -27,9 +27,9 @@ def process_1(path):
 def process_2(path):
 
     # Load image
-    img = cv2.imread(path)
+    # img = cv2.imread(path)
     # Grayscaling
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    img = cv2.cvtColor(path, cv2.COLOR_RGB2GRAY)
 
     _,thresh = cv2.threshold(img,127,255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
@@ -89,13 +89,14 @@ def get_letters(captcha):
        A function to create contours of captcha's letters
        :param captcha: treated captcha image
        :return: array with letter images
-       """
+    """
     counts = {}
     # img = cv2.imread(captcha)
     resized = cv2.resize(captcha, (140,60), interpolation=cv2.INTER_AREA)
     # cinza
     # img_gray = cv2.cvtColor(resized, cv2.COLOR_RGB2GRAY)
     img_gray = cv2.copyMakeBorder(resized, 10,10,10,10,cv2.BORDER_CONSTANT,value=[255,255,255])
+    #Area = (80,160) after border
     blur = cv2.GaussianBlur(img_gray, (3, 3), 0)
 
     # preto e branco
@@ -115,7 +116,7 @@ def get_letters(captcha):
         else:
             area = cv2.contourArea(contorno)
             # print('Area:',area)
-            if area > 155:
+            if area > 150:
                 if l / a > 1.1:
                     half_width = int(a / 2)
                     regiao_letras.append((x, y, half_width, a))

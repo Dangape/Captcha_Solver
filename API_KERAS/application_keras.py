@@ -16,11 +16,11 @@ ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif']
 app.secret_key = "secret key"
 
 
-MODEL_FILENAME = "/app/result_model_letter.h5"
-MODEL_LABELS_FILENAME = "/app/model_labels.dat"
+# MODEL_FILENAME = "/app/result_model_letter.h5"
+# MODEL_LABELS_FILENAME = "/app/model_labels.dat"
 
-# MODEL_FILENAME = "result_model_letter.h5"
-# MODEL_LABELS_FILENAME = "model_labels.dat"
+MODEL_FILENAME = "result_model_letter.h5"
+MODEL_LABELS_FILENAME = "model_labels.dat"
 
 # Load up the model labels (so we can translate model predictions to actual letters)
 with open(MODEL_LABELS_FILENAME, "rb") as f:
@@ -36,15 +36,14 @@ def home():
 
 @app.route('/ocr', methods=['POST'])
 def predict_text():
-    # name1 = request.files['file']
-    name1 = request.form['string']
-    # name1 = name1.encode('utf-8')
-    # filename = name1.filename
-    # encoded_string = base64.b64encode(name1.read())
-    # reconstruct image as an numpy array
+    #FILE
+    name1 = request.files['file']
+    b64_string = base64.b64encode(name1.read())
 
-    b64_string = name1
-    # b64_string = b64_string.decode()
+    #B64 STRING
+    # name1 = request.form['string']
+    # b64_string = name1
+
     img = imread(io.BytesIO(base64.b64decode(b64_string)))
     predictions = []
     raw_img = processing_lab.process_1(img)
@@ -67,6 +66,7 @@ def predict_text():
 
         # Get captcha's text
         captcha_text = "".join(predictions)
+        # filename = name1.filename
         # Find real captcha name
         # end = filename.rfind('.')  # last occurence of '.'
         # real = filename[:end]

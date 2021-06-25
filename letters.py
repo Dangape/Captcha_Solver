@@ -10,8 +10,8 @@ import cv2
 from PIL import Image
 
 
-CAPTCHA_IMAGE_FOLDER = "Data/tratados/1/"
-OUTPUT_FOLDER = 'Data/letras1'
+CAPTCHA_IMAGE_FOLDER = "Data/tratados/2/"
+OUTPUT_FOLDER = 'Data/letras2'
 
 
 # Get a list of all the captcha images we need to process
@@ -53,7 +53,7 @@ for (i, captcha) in enumerate(captcha_image_files):
             area = cv2.contourArea(contorno)
             # print('Area:',area)
             # print(l,a)
-            if area > 200:
+            if area > 150:
                 if l / a > 1.1:
                     half_width = int(a / 2)
                     regiao_letras.append((x, y, half_width, a))

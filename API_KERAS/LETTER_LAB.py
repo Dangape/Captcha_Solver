@@ -9,28 +9,21 @@ import cv2
 from PIL import Image
 import numpy as np
 import base64
+import processing_lab
 
 
+CAPTCHA_IMAGE_FOLDER_1 = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\captcha_groups\1\3JS47.png"
+CAPTCHA_IMAGE_FOLDER_2 = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\captcha_groups\2\000FB.png"
 
-CAPTCHA_IMAGE_FOLDER = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\captcha_groups\1\1L8QM.png"
-
-
-# Load image
-img = cv2.imread(CAPTCHA_IMAGE_FOLDER)
-# cv2.imshow("Output", img)
-# cv2.waitKey()
-# Grayscaling
-img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-_,thresh = cv2.threshold(img,240,255, cv2.THRESH_BINARY_INV + cv2.THRESH_TRUNC)
-thresh = cv2.bitwise_not(thresh)
-# rgb = Image.fromarray(thresh)
-# print(type(thresh))
+img = cv2.imread(CAPTCHA_IMAGE_FOLDER_2)
+img = processing_lab.process_1(img)
 counts = {}
 # img = cv2.imread(captcha)
-resized = cv2.resize(thresh, (140, 60), interpolation=cv2.INTER_AREA)
+resized = cv2.resize(img, (140, 60), interpolation=cv2.INTER_AREA)
 # cinza
 # img_gray = cv2.cvtColor(resized, cv2.COLOR_RGB2GRAY)
 img_gray = cv2.copyMakeBorder(resized, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value=[255, 255, 255])
+print(img_gray.shape)
 blur = cv2.GaussianBlur(img_gray, (3, 3), 0)
 
 # preto e branco
@@ -51,8 +44,8 @@ for contorno in contornos:
         area = cv2.contourArea(contorno)
         print('Area:',area)
         print(l,a)
-        if area > 155:
-            if l / a > 0.7:
+        if area > 150:
+            if l / a > 1.1:
                 half_width = int(a / 2)
                 regiao_letras.append((x, y, half_width, a))
                 regiao_letras.append((x + half_width, y, half_width, a))
