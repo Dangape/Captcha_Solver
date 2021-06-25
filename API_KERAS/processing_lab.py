@@ -3,9 +3,14 @@ import imutils
 import cv2
 from PIL import Image
 
+import glob
+import os
+
 # 1 = caxias
 # 2 = barueri
 # 3 = niteroi
+
+
 
 #Tirar comentario do imread e trocar parametro path no grayscaling para rodar localmente
 def process_1(path):
@@ -169,11 +174,13 @@ def resize_to_fit(image, width, height):
     # return the pre-processed image
     return image
 
-# CAPTCHA_IMAGE_FOLDER = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\tratados\1"
+# CAPTCHA_IMAGE_FOLDER = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\Testes reais\CAP13.jpg"
 
-# captcha_image_files = list(paths.list_images(CAPTCHA_IMAGE_FOLDER))
+# captcha_image_files = list(glob.glob(os.path.join(CAPTCHA_IMAGE_FOLDER))
 # captcha_image_files = np.random.choice(captcha_image_files, size=(1,), replace=False)
-# # print(get_letters(captcha_image_files[0]))
+# print(get_letters(CAPTCHA_IMAGE_FOLDER))
 # print(get_letters(captcha_image_files[0]))
+
+
 
 

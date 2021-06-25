@@ -6,8 +6,8 @@ import imutils
 import numpy as np
 
 
-CAPTCHA_IMAGE_FOLDER = "Data/captcha_groups/6"
-OUTPUT_FOLDER = "Data/extracted_letter_images"
+CAPTCHA_IMAGE_FOLDER = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\captcha_groups\6"
+OUTPUT_FOLDER = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\extracted_letter_images"
 
 
 # Get a list of all the captcha images we need to process

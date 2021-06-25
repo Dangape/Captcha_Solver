@@ -16,8 +16,11 @@ ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif']
 app.secret_key = "secret key"
 
 
-MODEL_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\API_KERAS\result_model_letter.h5"
-MODEL_LABELS_FILENAME = r"E:\Users\Daniel\OneDrive\CaptchaML\API_KERAS\model_labels.dat"
+# MODEL_FILENAME = "/app/result_model_letter.h5"
+# MODEL_LABELS_FILENAME = "/app/model_labels.dat"
+
+MODEL_FILENAME = "result_model_letter.h5"
+MODEL_LABELS_FILENAME = "model_labels.dat"
 
 # Load up the model labels (so we can translate model predictions to actual letters)
 with open(MODEL_LABELS_FILENAME, "rb") as f:
@@ -34,9 +37,13 @@ def home():
 @app.route('/ocr', methods=['POST'])
 def predict_text():
     name1 = request.files['file']
-    filename = name1.filename
+    # name1 = request.form['string']
+    # name1 = name1.encode('utf-8')
+    # filename = name1.filename
     encoded_string = base64.b64encode(name1.read())
     # reconstruct image as an numpy array
+
+    b64_string = name1
     b64_string = encoded_string.decode()
     img = imread(io.BytesIO(base64.b64decode(b64_string)))
     predictions = []
@@ -61,9 +68,10 @@ def predict_text():
         # Get captcha's text
         captcha_text = "".join(predictions)
         # Find real captcha name
-        end = filename.rfind('.')  # last occurence of '.'
-        real = filename[:end]
-    return {'Predicted':captcha_text,"Real":real}
+        # end = filename.rfind('.')  # last occurence of '.'
+        # real = filename[:end]
+    return {'Predicted':captcha_text}
 
 if __name__ == '__main__':
     app.run(debug=True, use_debugger=False, use_reloader=False)
+    # app.run(host='0.0.0.0')

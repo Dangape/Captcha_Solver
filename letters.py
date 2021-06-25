@@ -4,6 +4,10 @@ import cv2
 import glob
 import imutils
 import numpy as np
+import numpy as np
+import imutils
+import cv2
+from PIL import Image
 
 
 CAPTCHA_IMAGE_FOLDER = "Data/tratados/1/"
@@ -48,6 +52,7 @@ for (i, captcha) in enumerate(captcha_image_files):
         else:
             area = cv2.contourArea(contorno)
             # print('Area:',area)
+            # print(l,a)
             if area > 200:
                 if l / a > 1.1:
                     half_width = int(a / 2)
@@ -88,6 +93,8 @@ for (i, captcha) in enumerate(captcha_image_files):
         cv2.rectangle(img_final,(x-2,y-2),(x+l+2,y+a+2),(0,255,0),1)
 
         cv2.imwrite(p, img_letra)
+
+
 
         # increment the count for the current key
         counts[texto_letra] = count + 1
