@@ -55,7 +55,7 @@ data = np.array(data, dtype="float") / 255.0
 labels = np.array(labels)
 
 # Split the training data into separate train and test sets
-(X_train, X_test, Y_train, Y_test) = train_test_split(data, labels, test_size=0.05, random_state=0)
+(X_train, X_test, Y_train, Y_test) = train_test_split(data, labels, test_size=0.20, random_state=0)
 
 # Convert the labels (letters) into one-hot encodings that Keras can work with
 lb = LabelBinarizer().fit(Y_train)
