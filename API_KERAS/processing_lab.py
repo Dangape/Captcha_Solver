@@ -115,8 +115,8 @@ def get_letters(captcha):
             pass
         else:
             area = cv2.contourArea(contorno)
-            # print('Area:',area)
-            if area > 150:
+            #Barueri: 120; Caxias:155
+            if area > 120:
                 if l / a > 1.1:
                     half_width = int(a / 2)
                     regiao_letras.append((x, y, half_width, a))
@@ -125,6 +125,14 @@ def get_letters(captcha):
                     regiao_letras.append((x, y, l, a))
 
     regiao_letras = sorted(regiao_letras, key=lambda x: x[0])
+
+    #remover menor area caso reconheça uma letra a mais
+    prod = []
+    if len(regiao_letras) > 5:
+        for i in regiao_letras:
+            prod.append(i[2] * i[3])
+        min_index = prod.index(min(prod))
+        del regiao_letras[min_index]
 
     # desenhar contornos e separar em arquivos
     img_final = cv2.merge([img] * 3)
