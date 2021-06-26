@@ -12,10 +12,10 @@ import base64
 import API_KERAS.processing_lab as pl
 
 
-CAPTCHA_IMAGE_FOLDER_1 = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\captcha_groups\1\3JS47.png"
+CAPTCHA_IMAGE_FOLDER_1 = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\Testes reais\7tgpd.png"
 CAPTCHA_IMAGE_FOLDER_2 = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\captcha_groups\2\0AB37.png"
 
-img = cv2.imread(CAPTCHA_IMAGE_FOLDER_2)
+img = cv2.imread(CAPTCHA_IMAGE_FOLDER_1)
 img = pl.process_1(img)
 counts = {}
 # img = cv2.imread(captcha)
@@ -44,7 +44,7 @@ for contorno in contornos:
         area = cv2.contourArea(contorno)
         print('Area:',area)
         print(l,a)
-        if area > 150:
+        if area > 120:
             if l / a > 1.1:
                 half_width = int(a / 2)
                 regiao_letras.append((x, y, half_width, a))
@@ -53,6 +53,12 @@ for contorno in contornos:
                 regiao_letras.append((x, y, l, a))
 
 regiao_letras = sorted(regiao_letras, key=lambda x: x[0])
+prod = []
+if len(regiao_letras) > 5:
+    for i in regiao_letras:
+        prod.append(i[2]*i[3])
+    min_index = prod.index(min(prod))
+    del regiao_letras[min_index]
 print(regiao_letras)
 
 # desenhar contornos e separar em arquivos
@@ -67,7 +73,7 @@ for retangulo in regiao_letras:
 #     cv2.imshow("Output", img_letra)
 #     cv2.waitKey()
 #
-# cv2.imshow("Output", img_final)
-# cv2.waitKey()
+cv2.imshow("Output", img_final)
+cv2.waitKey()
 
 #
