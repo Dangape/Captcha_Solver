@@ -116,7 +116,8 @@ def get_letters(captcha):
         else:
             area = cv2.contourArea(contorno)
             # print('Area:',area)
-            if area > 150:
+            #Barueri: 120; Caxias:155
+            if area > 120:
                 if l / a > 1.1:
                     half_width = int(a / 2)
                     regiao_letras.append((x, y, half_width, a))
