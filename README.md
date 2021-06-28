@@ -20,8 +20,8 @@ docker run dangape/api_keras
 ```
 
 In order to test the API you can use postman or another request app to make a POST request.
-Notice that you can make a POST request with a base64 string image and with the key `string`, just like the image bellow. Or you can make a POST request with a image file, just make sure to change the key name to 'file' in this case. 
-Also remember to change the request code line inside the `application_keras.py` file
+Notice that you can make a POST request with a base64 string image and with the key `string`, just like the image bellow. /
+Or you can make a POST request with a image file, just make sure to change the key name to 'file' in this case. Also remember to change the request code line inside the `application_keras.py` file
 ![Request tutorial](/Plots/postman_prt.png)
 
 
@@ -29,20 +29,20 @@ Furthermore, all the required Python packages can be found in the `requirements.
 
 ## Python requirements
 You can find all the requirements to run the code in the `requirements.txt` file. But to make it easier I´ll list them below:
--numpy
--Flask
--opencv-python
--imageio
--Pillow
--imutils
--uwsgi
--tensorflow
--keras
--sklearn
+- numpy
+- Flask
+- opencv-python
+- imageio
+- Pillow
+- imutils
+- uwsgi
+- tensorflow
+- keras
+- sklearn
 
 ##CAPTCHA images
 This is a work in progress and currently the algorithm works just for simple CAPTCHAS, preferably with five letters. 
 Below you can see 2 examples of images that the algorithm can handle well.
 
-![Request tutorial](/Plots/captcah1.png)
+![Request tutorial](/Plots/captcha1.png)
 ![Request tutorial](/Plots/captcha2.png)
