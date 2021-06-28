@@ -15,8 +15,8 @@ import API_KERAS.processing_lab as pl
 CAPTCHA_IMAGE_FOLDER_1 = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\Testes reais\7tgpd.png"
 CAPTCHA_IMAGE_FOLDER_2 = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\captcha_groups\2\0AB37.png"
 
-img = cv2.imread(CAPTCHA_IMAGE_FOLDER_1)
-img = pl.process_1(img)
+raw_img = cv2.imread(CAPTCHA_IMAGE_FOLDER_1)
+img = pl.process_1(raw_img)
 counts = {}
 # img = cv2.imread(captcha)
 resized = cv2.resize(img, (140, 60), interpolation=cv2.INTER_AREA)
@@ -75,5 +75,3 @@ for retangulo in regiao_letras:
 #
 cv2.imshow("Output", img_final)
 cv2.waitKey()
-
-#

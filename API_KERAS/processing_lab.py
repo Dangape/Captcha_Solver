@@ -3,16 +3,11 @@ import imutils
 import cv2
 from PIL import Image
 
-import glob
-import os
 
 # 1 = caxias
 # 2 = barueri
 # 3 = niteroi
 
-
-
-#Tirar comentario do imread e trocar parametro path no grayscaling para rodar localmente
 def process_1(path):
     # Load image
     # img = cv2.imread(path)
@@ -83,7 +78,6 @@ def process_3(path):
     # cv2.imwrite("treated/imagem_tratada_{}.png".format("group3"), img)
     return img
 
-#Tirar comentario do imgread se quiser rodar localmente
 def get_letters(captcha):
     """
        A function to create contours of captcha's letters
@@ -108,7 +102,6 @@ def get_letters(captcha):
 
     # filtrar contornos que sao realmente letras
     max_w, max_h = img.shape[:2]
-
     for contorno in contornos:
         (x, y, l, a) = cv2.boundingRect(contorno)
         if l >= max_w:
@@ -158,37 +151,24 @@ def resize_to_fit(image, width, height):
     # grab the dimensions of the image, then initialize
     # the padding values
     (h, w) = image.shape[:2]
-
     # if the width is greater than the height then resize along
     # the width
     if w > h:
         image = imutils.resize(image, width=width)
-
     # otherwise, the height is greater than the width so resize
     # along the height
     else:
         image = imutils.resize(image, height=height)
-
     # determine the padding values for the width and height to
     # obtain the target dimensions
     padW = int((width - image.shape[1]) / 2.0)
     padH = int((height - image.shape[0]) / 2.0)
-
     # pad the image then apply one more resizing to handle any
     # rounding issues
     image = cv2.copyMakeBorder(image, padH, padH, padW, padW,
         cv2.BORDER_REPLICATE)
     image = cv2.resize(image, (width, height))
-
-    # return the pre-processed image
     return image
-
-# CAPTCHA_IMAGE_FOLDER = r"E:\Users\Daniel\OneDrive\CaptchaML\Data\Testes reais\CAP13.jpg"
-
-# captcha_image_files = list(glob.glob(os.path.join(CAPTCHA_IMAGE_FOLDER))
-# captcha_image_files = np.random.choice(captcha_image_files, size=(1,), replace=False)
-# print(get_letters(CAPTCHA_IMAGE_FOLDER))
-# print(get_letters(captcha_image_files[0]))
 
 
 
