@@ -21,11 +21,10 @@ docker run dangape/api_keras
 
 In order to test the API you can use postman or another request app to make a POST request.
 Notice that you can make a POST request with a base64 string image and with the key `string`, just like the image bellow.  
-Or you can make a POST request with a image file, just make sure to change the key name to 'file' in this case. Also remember to change the request code line inside the `application_keras.py` file
+Or you can make a POST request with a image file, just make sure to change the key name to 'file' in this case. 
+Also remember to change the request code line inside the `application_keras.py` file. You can use [this](https://base64.guru/converter/encode/image) website to create a base64 string
 ![Request tutorial](/Plots/postman_prt.png)
 
-
-Furthermore, all the required Python packages can be found in the `requirements.txt` file.
 
 ## Python requirements
 You can find all the requirements to run the code in the `requirements.txt` file. But to make it easier I´ll list them below:
