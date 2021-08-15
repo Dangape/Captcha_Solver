@@ -8,9 +8,8 @@ import os
 from tqdm import tqdm
 import time
 
-for j in range(2,5):
-
-    for i in tqdm(range(4439,5001)):
+for j in range(7,8):
+    for i in tqdm(range(1,5001)):
         try:
             with open("Data/captcha_groups/"+str(j)+"/captcha{}.png".format(i), "rb") as image_file:
                 encoded_string = base64.b64encode(image_file.read())
@@ -85,7 +84,7 @@ for j in range(2,5):
             end = '"'
             resp = resp.split(start)[1].split(end)[0]
 
-            old_file = os.path.join("Data/captcha_groups/"+str(j), "captcha{}.png".format(i))
+            old_file = os.path.join("Data/captcha_groups/"+str(j)+"/captcha{}.png".format(i))
             new_file = os.path.join("Data/captcha_groups/"+str(j), "{}.png".format(resp))
             if os.path.isfile("Data/captcha_groups/" + str(j) + "/{}.png".format(resp)):
                 continue
