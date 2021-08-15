@@ -4,12 +4,7 @@
 All the needed files are inside the `API_KERAS` folder. 
 In order to run the API locally just run the `application_keras.py` and use Postman to make a POST request.
 
-In order to run the API and create the container you will need to run the following code on your terminal:
-```
-docker-compose build && docker-compose up
-```
-
-If you want to download the conatiner directly from my [Docker Hub profile](https://hub.docker.com/u/dangape) just run the following code:
+If you want to download the container directly from my [Docker Hub profile](https://hub.docker.com/u/dangape) just run the following code:
 ```
 docker pull dangape/api_keras
 ```
@@ -41,7 +36,32 @@ You can find all the requirements to run the code in the `requirements.txt` file
 
 ## CAPTCHA images
 This is a work in progress and currently the algorithm works just for simple CAPTCHAS, preferably with five letters.   
-Below you can see 2 examples of images that the algorithm can handle well.
+Below you can see 4 examples of images that the algorithm can handle well.
 
 ![Request tutorial](/Plots/captcha1.png)
 ![Request tutorial](/Plots/captcha2.png)
+![Request tutorial](/Plots/captcha3.png)
+![Request tutorial](/Plots/captcha4.png)
+
+## Folder and Files
+- `LETTER_LAB.py` perform opencv tests on captcha files, with this file you can test process to see how they; will handle the given captcha.
+- `get_captcha.py` perform web scrapping in some sites to download captcha files to train the model;
+- `label_data.py` uses an online API to label downloaded data;
+- `build_training_data_letters.py` split captcha into single letters and assign them to a folder with the matching letter name;
+- `train_model.py` trains CNN model;
+- `test_accuracy.py` tests the model accuracy;
+- `application_keras.py` run the Flask API;
+- `processing_lab.py` contains different models for processing different captchas;
+
+## Models
+
+- Use `model1` for the first and second captcha type;
+- Use `model2` for the third captcha type;
+- Use `model3` for the fourth captcha type.
+
+## Accuracy socres
+- `model1`: 87,5%
+	- first captcha: 87,5%
+	- second captcha: 69,5%
+- `model2`: 45,00%
+- `model3`: 99,00%
