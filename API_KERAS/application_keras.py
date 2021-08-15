@@ -36,45 +36,41 @@ def home():
 
 @app.route('/ocr', methods=['POST'])
 def predict_text():
-    try:
+    ## FILE
+    name1 = request.files['file']
+    b64_string = base64.b64encode(name1.read())
 
-        #FILE
-        name1 = request.files['file']
-        b64_string = base64.b64encode(name1.read())
+    ## B64 STRING
+    # name1 = request.form['string']
+    # b64_string = name1
 
-        #B64 STRING
-        # name1 = request.form['string']
-        # b64_string = name1
+    img = imread(io.BytesIO(base64.b64decode(b64_string)))
+    predictions = []
+    img = processing_lab.model2(img)
+    for letter in img:
+        # rgb = cv2.cvtColor(letter, cv2.COLOR_BGR2RGB)
+        # Re-size the letter image to 20x20 pixels to match training data
+        letter_image = processing_lab.resize_to_fit(letter, 20, 20)
 
-        img = imread(io.BytesIO(base64.b64decode(b64_string)))
-        predictions = []
-        raw_img = processing_lab.process_1(img)
-        img = processing_lab.get_letters(raw_img)
-        for letter in img:
-            # rgb = cv2.cvtColor(letter, cv2.COLOR_BGR2RGB)
-            # Re-size the letter image to 20x20 pixels to match training data
-            letter_image = processing_lab.resize_to_fit(letter, 20, 20)
+        # Turn the single image into a 4d list of images to make Keras happy
+        letter_image = np.expand_dims(letter_image, axis=2)
+        letter_image = np.expand_dims(letter_image, axis=0)
 
-            # Turn the single image into a 4d list of images to make Keras happy
-            letter_image = np.expand_dims(letter_image, axis=2)
-            letter_image = np.expand_dims(letter_image, axis=0)
+        # Ask the neural network to make a prediction
+        prediction = model.predict(letter_image)
 
-            # Ask the neural network to make a prediction
-            prediction = model.predict(letter_image)
+        # Convert the one-hot-encoded prediction back to a normal letter
+        letter = lb.inverse_transform(prediction)[0]
+        predictions.append(letter)
 
-            # Convert the one-hot-encoded prediction back to a normal letter
-            letter = lb.inverse_transform(prediction)[0]
-            predictions.append(letter)
-
-            # Get captcha's text
-            captcha_text = "".join(predictions)
-            # filename = name1.filename
-            # Find real captcha name
-            # end = filename.rfind('.')  # last occurence of '.'
-            # real = filename[:end]
-        return {'Predicted':captcha_text}
-    except:
-        return 'Captcha error !!'
+        # Get captcha's text
+        captcha_text = "".join(predictions)
+        captcha_text = captcha_text.replace("_","")
+        # filename = name1.filename
+        # Find real captcha name
+        # end = filename.rfind('.')  # last occurence of '.'
+        # real = filename[:end]
+    return {'Predicted':captcha_text}
 
 if __name__ == '__main__':
     # app.run(debug=True, use_debugger=False, use_reloader=False)
